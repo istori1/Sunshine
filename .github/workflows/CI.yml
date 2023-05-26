@@ -224,9 +224,10 @@ jobs:
           npm install --lockfile-version 2 --package-lock-only
           pip install ./flatpak-builder-tools/node
           flatpak-node-generator -o npm-generated-sources.json npm package-lock.json
+          mkdir -p npm
           cp npm-generated-sources.json build/npm-generated-sources.json
-          mv npm-generated-sources.json artifacts/npm-generated-sources.json
-          mv package-lock.json artifacts/package-lock.json
+          mv npm-generated-sources.json npm/npm-generated-sources.json
+          mv package-lock.json npm/package-lock.json
 
       - name: Checkout Flathub Shared Modules
         uses: actions/checkout@v3
@@ -261,6 +262,12 @@ jobs:
             dev.lizardbyte.sunshine master
           flatpak build-bundle --runtime build/local-repo --arch=${{ matrix.arch }} \
             artifacts/sunshine_debug_${{ matrix.arch }}.flatpak dev.lizardbyte.sunshine.Debug master
+
+      - name: Upload npm Sources Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: sunshine-linux-flatpak-npm-sources
+          path: npm/
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3
