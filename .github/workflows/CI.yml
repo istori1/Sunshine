@@ -213,19 +213,26 @@ jobs:
             -DSUNSHINE_CONFIGURE_ONLY=ON \
             ..
 
+      - name: Checkout Flatpak Builder Tools
+        uses: actions/checkout@v3
+        with:
+          repository: flatpak/flatpak-builder-tools
+          path: flatpak-builder-tools
+
       - name: Generate cache for npm
         run: |
           npm install --lockfile-version 2 --package-lock-only
-          git clone --depth 1 https://github.com/flatpak/flatpak-builder-tools.git
           pip install ./flatpak-builder-tools/node
           flatpak-node-generator -o npm-generated-sources.json npm package-lock.json
           cp npm-generated-sources.json build/npm-generated-sources.json
           mv npm-generated-sources.json artifacts/npm-generated-sources.json
           mv package-lock.json artifacts/package-lock.json
 
-      - name: Clone Flathub Shared Modules
-        working-directory: build
-        run: git clone --depth 1 https://github.com/flathub/shared-modules.git
+      - name: Checkout Flathub Shared Modules
+        uses: actions/checkout@v3
+        with:
+          repository: flathub/shared-modules
+          path: build/shared-modules
 
       - name: External Data Checker
         run: |
