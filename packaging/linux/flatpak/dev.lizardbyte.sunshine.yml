@@ -127,9 +127,19 @@ modules:
       - x86_64
     buildsystem: cmake-ninja
     config-opts:
+      - -DENABLE_OPENCL=ON
+      - -DENABLE_X11_DRI3=ON
+      - -DENABLE_WAYLAND=ON
+      - -DENABLE_ITT=OFF
+      - -DENABLE_TEXTLOG=OFF
+      - -DENABLE_STAT=OFF
+      - -DBUILD_ALL=OFF
+      - -DBUILD_RUNTIME=ON
       - -DBUILD_SAMPLES=OFF
-      - -DBUILD_TUTORIALS=OFF
-      - -DENABLE_X11=OFF
+      - -DBUILD_TESTS=OFF
+      - -DBUILD_TOOLS=OFF
+      - -DUSE_SYSTEM_GTEST=OFF
+      - -DMFX_ENABLE_KERNELS=ON
     sources:
       - type: archive
         url: https://github.com/Intel-Media-SDK/MediaSDK/archive/refs/tags/intel-mediasdk-23.2.2.tar.gz
@@ -139,6 +149,18 @@ modules:
           project-id: 21814
           stable-only: true
           url-template: https://github.com/Intel-Media-SDK/MediaSDK/archive/refs/tags/intel-mediasdk-$version.tar.gz
+    modules:
+      - name: libdrm
+        buildsystem: meson
+        sources:
+        - type: archive
+          url: https://gitlab.freedesktop.org/mesa/drm/-/archive/libdrm-2.4.115/drm-libdrm-2.4.115.tar.gz
+          sha256: fd8b7c6e4e40d13c32ab67ace2cb6c71e08c9ca53124ff33ccadd74f604117e3
+          x-checker-data:
+            type: anitya
+            project-id: 1596
+            stable-only: true
+            url-template: https://gitlab.freedesktop.org/mesa/drm/-/archive/libdrm-$version/drm-libdrm-$version.tar.gz
 
   # Caching is configured until here, not including CUDA
   - name: cuda
