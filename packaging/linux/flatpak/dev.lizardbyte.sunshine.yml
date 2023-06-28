@@ -39,7 +39,7 @@ modules:
       - "*"
     build-options:
       build-args:
-        - --filesystem=~/.flatpak-builder/downloads
+        - --filesystem=~/build/.flatpak-builder/downloads
       arch:
         x86_64:
           env:
