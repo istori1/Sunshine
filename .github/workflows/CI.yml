@@ -169,7 +169,7 @@ jobs:
             npm \
             qemu-user-static
           sudo su $(whoami) -c '
-            flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+            flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
           '
           sudo su $(whoami) -c '
             flatpak install flathub org.flatpak.Builder org.flathub.flatpak-external-data-checker -y
