@@ -173,6 +173,7 @@ modules:
       - "*"
     build-options:
       build-args:
+        # Value replaced in CI
         - --filesystem=home
       env:
         # Value replaced in CI
