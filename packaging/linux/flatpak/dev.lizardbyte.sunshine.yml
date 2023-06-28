@@ -162,7 +162,6 @@ modules:
             stable-only: true
             url-template: https://gitlab.freedesktop.org/mesa/drm/-/archive/libdrm-$version/drm-libdrm-$version.tar.gz
 
-  # Caching is configured until here, not including CUDA
   - name: cuda
     disabled: false
     buildsystem: simple
